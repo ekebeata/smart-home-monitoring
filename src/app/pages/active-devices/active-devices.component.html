@@ -1,0 +1,10 @@
+<h2>Bekapcsolt eszközök</h2>
+
+<mat-card *ngFor="let device of activeDevices" class="device-card">
+  <mat-card-title>{{ device.name }}</mat-card-title>
+  <mat-card-subtitle>{{ device.brand }}</mat-card-subtitle>
+  <mat-card-content>
+    Típus: {{ device.type }} <br />
+    Fogyasztás: {{ device.powerUsage || 'n/a' }} W
+  </mat-card-content>
+</mat-card>

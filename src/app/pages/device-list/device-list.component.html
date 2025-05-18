@@ -1,0 +1,72 @@
+<app-add-device (deviceAdded)="onDeviceAdded($event)"></app-add-device>
+
+<ul>
+  <li *ngFor="let device of devices">
+    {{ device.name }} ({{ device.type }})
+    <button (click)="onEdit(device)">Módosít</button>
+    <button (click)="onRemove(device.id)">Töröl</button>
+  </li>
+</ul>
+
+<h2>Háztartási eszközök</h2>
+
+<!-- 1. *ngIf példa – ha van eszköz -->
+<div *ngIf="devices.length > 0; else noDevices">
+  <table>
+    <tr>
+      <th>Név</th>
+      <th>Típus</th>
+      <th>Márka</th>
+      <th>Állapot</th>
+      <th>Fogyasztás</th>
+    </tr>
+
+    <!--
+    [ngClass] – eszköz állapota szerint piro/zöld
+    [ngStyle] – fogyasztás alapján dinamikusan változik a háttérszín
+    -->
+    <!-- 2. *ngFor – eszközök listázása -->
+    <tr *ngFor="let device of devices"
+        [ngClass]="{ 'online': getStatus(device.id)?.isRunning, 'offline': !getStatus(device.id)?.isRunning }"
+        [ngStyle]="{
+          'background-color': (getPower(device.id)?.currentWatt ?? 0) > 200 ? '#ffdddd' : '#ddffdd'
+        }">
+
+      <td>{{ device.name }}</td>
+      <td>
+
+        {{ device.type | deviceType }}
+
+      </td>
+      <td>{{ device.brand }}</td>
+
+      <td>
+        <!-- 4. *ngIf – fut-e épp az eszköz -->
+        <span *ngIf="getStatus(device.id)?.isRunning; else stopped">Bekapcsolva</span>
+        <ng-template #stopped><span>Kikapcsolva</span></ng-template>
+      </td>
+
+      <td>
+        {{ getPower(device.id).totalTodayWh | powerFormat }}
+      </td>
+
+    </tr>
+<h2>Feladatok </h2>
+    <app-device-item
+      *ngFor="let device of devices"
+      [device]="device"
+      [status]="getStatus(device.id)"
+      [power]="getPower(device.id)"
+      (toggle)="onToggle($event)"
+      (remove)="onRemove($event)"
+      (showDetails)="onDetails($event)">
+    </app-device-item>
+
+  </table>
+</div>
+
+<!-- Alternatív tartalom, ha nincs eszköz -->
+<ng-template #noDevices>
+  <p>Nincs elérhető háztartási eszköz.</p>
+</ng-template>
+

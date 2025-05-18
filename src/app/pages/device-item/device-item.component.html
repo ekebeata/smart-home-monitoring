@@ -1,0 +1,20 @@
+
+<tr>
+  <td>{{ device.name }}</td>
+  <td>{{ device.type }}</td>
+  <td>{{ device.brand }}</td>
+  <td>
+    <span [style.color]="status.isRunning ? 'green' : 'red'">
+      {{ status.isRunning ? 'Bekapcsolva' : 'Kikapcsolva' }}
+    </span>
+  </td>
+  <td>
+    {{ power.currentWatt }} W (ma: {{ power.totalTodayWh }} Wh)
+  </td>
+  <td>
+    <!-- Gombok, amelyek eseményt küldenek -->
+    <button (click)="onToggle()">Be/Ki</button>
+    <button (click)="onDetails()">Részletek</button>
+    <button (click)="onRemove()">Eszköz törlése</button>
+  </td>
+</tr>

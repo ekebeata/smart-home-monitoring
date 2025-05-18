@@ -1,0 +1,26 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-menu [sidenav]="sidenav"></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button 
+        mat-button 
+        (click)="onToggleSidenav(sidenav)"
+        class="menu-toggle-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div>Smart Home Monitoring</div>
+      <nav>
+        <ul>
+          <li><a routerLink="/home">Home</a></li>
+          <!--<li><a routerLink="/deviceItem">devItem</a></li>-->
+          <li><a routerLink="/activeDevice">Aktív eszközök</a></li>
+          <li><a routerLink="/deviceList">Eszközlista</a></li>
+          <li><a routerLink="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </mat-toolbar>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>

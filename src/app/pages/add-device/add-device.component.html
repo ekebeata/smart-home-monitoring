@@ -1,0 +1,40 @@
+<p>add-device works!</p>
+<form (ngSubmit)="onSubmit()" #deviceForm="ngForm">
+  <mat-card>
+    <mat-card-title>Új eszköz hozzáadása</mat-card-title>
+    <mat-card-content>
+
+      <!-- 1. Eszköz neve -->
+      <mat-form-field>
+        <mat-label>Név</mat-label>
+        <input matInput name="name" [(ngModel)]="newDevice.name" required>
+      </mat-form-field>
+
+      <!-- 2. Eszköz típusa -->
+      <mat-form-field>
+        <mat-label>Típus</mat-label>
+        <mat-select name="type" [(ngModel)]="newDevice.type" required>
+          <mat-option value="washing_machine">Mosógép</mat-option>
+          <mat-option value="fridge">Hűtő</mat-option>
+          <mat-option value="oven">Sütő</mat-option>
+          <mat-option value="dishwasher">Mosogatógép</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- 3. Márka -->
+      <mat-form-field>
+        <mat-label>Márka</mat-label>
+        <input matInput name="brand" [(ngModel)]="newDevice.brand" required>
+      </mat-form-field>
+
+      <!-- 4. Okos eszköz-e -->
+    
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
+        Hozzáadás
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
