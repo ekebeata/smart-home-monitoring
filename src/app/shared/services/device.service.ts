@@ -1,15 +1,16 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HouseholdDevice } from '../../models/household-device.model';
-import { Firestore, collection, query, where, orderBy, limit, getDocs, startAfter } from '@angular/fire/firestore';
-
+//import { Firestore, collection, query, where, orderBy, getDocs, limit, startAfter } from '@angular/fire/firestore';
+//import { inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DeviceService {
-  /*private firestore = inject(Firestore);
+  /*
+  private firestore = inject(Firestore);
 
   async getInactiveDevices() {
     const devicesRef = collection(this.firestore, 'devices');
@@ -61,13 +62,13 @@ export class DeviceService {
     return querySnapshot.docs.map(doc => doc.data());
   }
   */
+  
   private devices: HouseholdDevice[] = [
-    { id: '1', name: 'Mosógép', type: 'washing_machine', brand: 'Samsung'},
+    { id: '1', name: 'Mosógép', type: 'washing_machine', brand: 'Samsung' },
     { id: '2', name: 'Hűtő', type: 'fridge', brand: 'LG'},
-    { id: '3', name: 'Mosógép', type: 'washing_machine', brand: 'Samsung'},
-    { id: '4', name: 'Hűtőszekrény', type: 'fridge', brand: 'LG'},
-    { id: '5', name: 'Sütő', type: 'oven', brand: 'Bosch'},
-    { id: '6', name: 'Mosogatógép', type: 'dishwasher', brand: 'Whirlpool'},
+    { id: '3', name: 'Hűtő', type: 'fridge', brand: 'Samsung'},
+    { id: '4', name: 'Sütő', type: 'oven', brand: 'Samsung'},
+    //{ id: '5', name: 'Mosogatógép', type: 'dishwasher', brand: 'Samsung' },
   ];
 
   private devicesSubject = new BehaviorSubject<HouseholdDevice[]>(this.devices);
